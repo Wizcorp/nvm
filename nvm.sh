@@ -74,6 +74,7 @@ nvm()
     nvm help
     return
   fi
+
   case $1 in
     "help" )
       echo
@@ -125,6 +126,7 @@ nvm()
         make && \
         rm -f "$NVM_DIR/$VERSION" 2>/dev/null && \
         make install
+        ln -s $NVM_DIR/$VERSION/lib/node $NVM_DIR/$VERSION/lib/node_modules
         )
       then
         nvm use $VERSION
