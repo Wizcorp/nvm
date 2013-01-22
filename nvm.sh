@@ -21,7 +21,7 @@ nvm_version()
 
     VERSION=`nvm_ls $PATTERN | tail -n1`
     echo "$VERSION"
-    
+
     if [ "$VERSION" = 'N/A' ]; then
         return 13
     fi
@@ -60,11 +60,11 @@ print_versions()
     for VERSION in $1; do
         PADDED_VERSION=`printf '%10s' $VERSION`
         if [[ -d "$NVM_DIR/$VERSION" ]]; then
-             PADDED_VERSION="\033[0;34m$PADDED_VERSION\033[0m" 
+             PADDED_VERSION="\033[0;34m$PADDED_VERSION\033[0m"
         fi
-        OUTPUT="$OUTPUT\n$PADDED_VERSION" 
+        OUTPUT="$OUTPUT\n$PADDED_VERSION"
     done
-    echo -e "$OUTPUT" | column 
+    echo -e "$OUTPUT" | column
 }
 
 nvm()
@@ -104,7 +104,7 @@ nvm()
       if [ ! `which curl` ]; then
         echo 'NVM Needs curl to proceed.' >&2;
       fi
-      
+
       if [ $# -ne 2 ]; then
         nvm help
         return
@@ -126,7 +126,7 @@ nvm()
         curl -C - --progress-bar $tarball -o "node-$VERSION.tar.gz" && \
         tar -xzf "node-$VERSION.tar.gz" && \
         cd "node-$VERSION" && \
-        ./configure --prefix="$NVM_DIR/$VERSION" && \
+        ./configure --prefix="$NVM_DIR/$VERSION" --enable-systemtap --enable-dtrace && \
         make && \
         rm -f "$NVM_DIR/$VERSION" 2>/dev/null && \
         make install
